@@ -35,7 +35,7 @@ module.exports = function(method, data, callback) {
     };
 
     function prefixValidator(prefix) {
-        result = false;
+        let result = false;
         let array = prefix.split("");
         let http = array.slice(0,7).join('');
         let https = array.slice(0,8).join('');
