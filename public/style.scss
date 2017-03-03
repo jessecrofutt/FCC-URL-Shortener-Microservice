@@ -5,7 +5,7 @@
   border-radius: $radius;
 }
 
-$textColor: rgb(10,0,0);
+$textColor: rgba(255,255,255, 0.8);
 $textColorHover: rgb(90,0,0);
 
 a:link {
@@ -25,15 +25,17 @@ a:active {
 }
 
 body {
-  font-family: 'Abel', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: black;
+  font-size: 0.75em;
+  font-style: normal;
 }
 
 .container {
   @include border-radius(4px);
   margin-right: auto;
   margin-left: auto;
-  background-color: rgba(100,130,230,0.5);
+  background-color: rgba(50,75,115,0.2);
   color: $textColor;
   padding: 10px;
   margin: 10px;
@@ -42,7 +44,7 @@ body {
 
 .examples {
   @extend .container;
-  background-color: rgba(50,65,115,0.7);
+  background-color: rgba(50,65,115,0.2);
 }
 
 .instructions {

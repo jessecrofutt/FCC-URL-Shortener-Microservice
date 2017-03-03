@@ -1,5 +1,5 @@
 "use strict";
-var dotenv = require('dotenv');   //for use of our environment variables
+let dotenv = require('dotenv');   //for use of our environment letiables
 dotenv.load();
 const urlHandler = require('./urlHandler.js');
 
@@ -8,17 +8,20 @@ const app = express();
 
 const mongoose = require('mongoose');
 
+
 const port =  process.env.PORT || 8888;
-const dataBaseLocation = process.env.MONGOLAB_URI || `mongodb://localhost:27017/url_shortener`;
+// const dataBaseLocation = process.env.MONGOLAB_URI;
+const dataBaseLocation = `mongodb://localhost:27017/url_shortener`;
 // const hostUrl = 'http://localhost:8888';
 const hostUrl = 'https://rocky-reef-42703.herokuapp.com';
 
-var favicon = require('serve-favicon');
-var path = require('path');
-// var assert = require('mongoose-assert')(mongoose);
+let favicon = require('serve-favicon');
+let path = require('path');
+// let assert = require('mongoose-assert')(mongoose);
 mongoose.connect(dataBaseLocation);
 
-var sassMiddleware = require("node-sass-middleware");
+
+let sassMiddleware = require("node-sass-middleware");
 app.use(sassMiddleware({
     src: __dirname + '/public',
     dest: '/tmp'
@@ -67,6 +70,6 @@ app.get("/:shortened", function (request, response) {
 });
 
     // listen for requests
-var listener = app.listen(port, function () {
+let listener = app.listen(port, function () {
     console.log('Your app is listening on port ' + listener.address().port);
 });

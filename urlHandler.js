@@ -3,20 +3,20 @@ const Url = require('./models/url');
 const validUrl = require('valid-url');
 // const hostUrl = 'http://localhost:8888';
 const hostUrl = 'https://rocky-reef-42703.herokuapp.com';
-var shortUrl = hostUrl;
-var populatedObject = {};
+let shortUrl = hostUrl;
+let populatedObject = {};
 
 module.exports = function(method, data, callback) {
     console.log('entrydata: ', data);
-    var alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
-    var base = alphabet.length; // base is the length of the alphabet (58 in this case)
-    var returnable;
-    var link;
+    let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
+    let base = alphabet.length; // base is the length of the alphabet (58 in this case)
+    let returnable;
+    let link;
         // utility function to convert base 10 integer to base 58 string
     function encode(num){
-        var encoded = '';
+        let encoded = '';
         while (num){
-            var remainder = num % base;
+            let remainder = num % base;
             num = Math.floor(num / base);
             encoded = alphabet[remainder].toString() + encoded;
         };
@@ -24,10 +24,10 @@ module.exports = function(method, data, callback) {
     };
         // utility function to convert a base 58 string to base 10 integer
     function decode(str){
-        var decoded = 0;
+        let decoded = 0;
         while (str){
-            var index = alphabet.indexOf(str[0]);
-            var power = str.length - 1;
+            let index = alphabet.indexOf(str[0]);
+            let power = str.length - 1;
             decoded += index * (Math.pow(base, power));
             str = str.substring(1);
         };
@@ -59,14 +59,15 @@ module.exports = function(method, data, callback) {
                         console.log(shortUrl);
                         populatedObject = {
                                             'original url': `${data}`,
-                                            'shortened url':  `${hostUrl}/${(doc._id)}`
+                                            'shortened url':  `${hostUrl}/${encode(doc._id)}`
                                           };
                         callback(null, populatedObject);
                     } else {
-                        console.log('Url hasn\'t been shortened');
-                        var newUrl = Url({
+
+                        let newUrl = Url({
                             long_url: data
                         });
+                        console.log('Url hasn\'t been shortened');
                         newUrl.save(
                           function(err) {
                             if (err) {
@@ -83,7 +84,14 @@ module.exports = function(method, data, callback) {
                         });
                     };
                 });
-            }
+            } else {
+              console.log('Not a URI');
+              populatedObject = {
+                                  'Invalid Url': ``,
+                                  'Correct Format': "new/http(s)://wwww."
+                                };
+              callback(null, populatedObject);
+            };
         } else {
           console.log('Not a URI');
           populatedObject = {
@@ -94,8 +102,10 @@ module.exports = function(method, data, callback) {
         };
     };
     if (method === 'retrieve') {
-        console.log('data: ', data);
-            Url.findOne({_id: data}, function (err, doc){
+            console.log('data: ', data);
+            let short = decode(data);
+            console.log('short: ', short);
+            Url.findOne({_id: short}, function (err, doc){
                 if (err) {
                   callback(err);
                 };

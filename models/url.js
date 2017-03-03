@@ -2,30 +2,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-var removeCounters = function(db, callback) {
-  var collection = db.collection('counters');
-  collection.remove({}, function (err) {
-    if (err) throw err;
-  });
-};
-
-    // create the counters schema with an _id field and a seq field
 var CounterSchema = Schema({
     _id: {type: String, required: true},
     seq: { type: Number, default: 0 }
 });
 
-    // create a model from that schema
 var counter = mongoose.model('counter', CounterSchema);
-    // var newCounter = counter({})
 counter.collection.drop();
 
-var initialCount = counter({_id: 'url_count', seq: 0});
+var initialCount = counter({_id: 'url_count', seq: 10000});
 initialCount.save(function(err){
   if (err) throw err;
 });
 
-    // create a schema for our links
 var urlSchema = new Schema({
   _id: {type: Number, index: true},
   long_url: String,
@@ -36,6 +25,7 @@ var urlSchema = new Schema({
     // every time before an entry is saved to the urls collection.
 urlSchema.pre('save', function(next){
   var doc = this;
+  console.log('doc: ', doc)
       // find the url_count and increment it by 1
   counter.findByIdAndUpdate({_id: 'url_count'}, {$inc: {seq: 1} }, function(error, counter) {
       if (error)
