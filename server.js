@@ -1,4 +1,6 @@
 "use strict";
+var dotenv = require('dotenv');   //for use of our environment variables
+dotenv.load();
 const urlHandler = require('./urlHandler.js');
 
 const express = require('express');
@@ -6,13 +8,14 @@ const app = express();
 
 const mongoose = require('mongoose');
 
-const port =  8888 || process.env.PORT ;
+const port =  process.env.PORT || 8888;
+const dataBaseLocation = process.env.MONGOLAB_URI || `mongodb://localhost:27017/url_shortener`;
 const hostUrl = 'http://localhost:8888';
 
 var favicon = require('serve-favicon');
 var path = require('path');
 // var assert = require('mongoose-assert')(mongoose);
-mongoose.connect(`mongodb://localhost:27017/url_shortener`);
+mongoose.connect(dataBaseLocation);
 
 var sassMiddleware = require("node-sass-middleware");
 app.use(sassMiddleware({
