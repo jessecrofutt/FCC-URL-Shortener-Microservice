@@ -1,3 +1,4 @@
+"use strict";
 const urlHandler = require('./urlHandler.js');
 
 const express = require('express');

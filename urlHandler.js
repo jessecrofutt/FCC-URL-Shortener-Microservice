@@ -1,3 +1,4 @@
+"use strict";
 const Url = require('./models/url');
 const validUrl = require('valid-url');
 const hostUrl = 'http://localhost:8888';
