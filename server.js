@@ -8,16 +8,17 @@ const app = express();
 
 const mongoose = require('mongoose');
 
-
 const port =  process.env.PORT || 8888;
-// const dataBaseLocation = process.env.MONGOLAB_URI;
-const dataBaseLocation = `mongodb://localhost:27017/url_shortener`;
-// const hostUrl = 'http://localhost:8888';
+
+const dataBaseLocation = process.env.MONGOLAB_URI;
+// const dataBaseLocation = `mongodb://localhost:27017/url_shortener`;
+
 const hostUrl = 'https://rocky-reef-42703.herokuapp.com';
+// const hostUrl = 'http://localhost:8888';
 
 let favicon = require('serve-favicon');
 let path = require('path');
-// let assert = require('mongoose-assert')(mongoose);
+let assert = require('mongoose-assert')(mongoose);
 mongoose.connect(dataBaseLocation);
 
 
