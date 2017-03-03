@@ -21,12 +21,9 @@ var urlSchema = new Schema({
   created_at: Date
 });
 
-    // The pre('save', callback) middleware executes the callback function
-    // every time before an entry is saved to the urls collection.
 urlSchema.pre('save', function(next){
   var doc = this;
-  console.log('doc: ', doc)
-      // find the url_count and increment it by 1
+  console.log('doc: ', doc);
   counter.findByIdAndUpdate({_id: 'url_count'}, {$inc: {seq: 1} }, function(error, counter) {
       if (error)
           return next(error);
