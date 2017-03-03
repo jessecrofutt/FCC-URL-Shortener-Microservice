@@ -1,0 +1,54 @@
+@mixin border-radius($radius){
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+$textColor: rgb(10,0,0);
+$textColorHover: rgb(90,0,0);
+
+a:link {
+    color: $textColor;
+}
+
+a:visited {
+    color: $textColor;
+}
+
+a:hover {
+    color: $textColorHover;
+}
+
+a:active {
+    color: $textColorHover;
+}
+
+body {
+  font-family: 'Abel', sans-serif;
+  background-color: black;
+}
+
+.container {
+  @include border-radius(4px);
+  margin-right: auto;
+  margin-left: auto;
+  background-color: rgba(100,130,230,0.5);
+  color: $textColor;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+
+.examples {
+  @extend .container;
+  background-color: rgba(50,65,115,0.7);
+}
+
+.instructions {
+  @extend .container;
+}
+
+.title {
+  @extend .container;
+}
