@@ -2,7 +2,7 @@
 const Url = require('./models/url');
 const validUrl = require('valid-url');
 // const hostUrl = 'http://localhost:8888';
-const hostUrl = 'https://rocky-reef-42703.herokuapp.com/';
+const hostUrl = 'https://rocky-reef-42703.herokuapp.com';
 var shortUrl = hostUrl;
 var populatedObject = {};
 
