@@ -10,7 +10,8 @@ const mongoose = require('mongoose');
 
 const port =  process.env.PORT || 8888;
 const dataBaseLocation = process.env.MONGOLAB_URI || `mongodb://localhost:27017/url_shortener`;
-const hostUrl = 'http://localhost:8888';
+// const hostUrl = 'http://localhost:8888';
+const hostUrl = 'https://rocky-reef-42703.herokuapp.com/';
 
 var favicon = require('serve-favicon');
 var path = require('path');
